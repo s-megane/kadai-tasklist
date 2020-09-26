@@ -17,7 +17,7 @@
                 </div>
                 
                 <div class="form-group">
-                    {!! Form::label("status" , "進捗状況:") !!}
+                    {!! Form::label("status" , "ステータスの更新:") !!}
                     {!! Form::text("status", null, ["class" => "form-control"]) !!}
                 </div>
 
