@@ -45,9 +45,16 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-       $task = new Task ;
-       $task->content = $request->content;
-       $task->save();
+    
+        $request->validate([ 
+            "content" => "required" ,
+            "status" => "required|max:10" ,
+        ]);
+        
+        $task = new Task ;
+        $task->content = $request->content;
+        $task->status = $request->status;
+        $task->save();
        
        return redirect('/');
     }
@@ -91,9 +98,14 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Task::findOrFail($id) ;
+        $request->validate([ 
+            "content" => "required" ,
+            "status" => "required|max:10" ,
+        ]);
         
+        $task = Task::findOrFail($id) ;
         $task->content = $request->content ;
+        $task->status = $request->status ;
         $task->save();
         
         return redirect('/');
@@ -107,8 +119,8 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $task->Task::findOrFail($id) ;
-        $task->delete ;
+        $task = Task::findOrFail($id) ;
+        $task->delete() ;
         
         return redirect("/");
     }
