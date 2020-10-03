@@ -2,7 +2,7 @@
 @section("content")
     @if (Auth::check())
         {{ Auth::user()->name . "のページです。" }}
-        
+        @include("tasks.index")
     @else
         <div class = "center center jumbotron">
             <div class = "text-center">

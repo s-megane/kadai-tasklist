@@ -11,18 +11,10 @@
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav">
                        @if (Auth::check())
-                           
-                            
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    {{-- ユーザ詳細ページへのリンク --}}
-                                    <li class="dropdown-item">{!! link_to_route("tasks.index" , "設定") !!}</li>
-                                    <li class="dropdown-divider"></li>
-                                    {{-- ログアウトへのリンク --}}
-                                    <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
-                                </ul>
-                            </li>
+                            <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト' ,[] ,  ['class' => 'nav-link']) !!}</li>
+                            {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('退会する', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::close() !!}       
                         @else
                             {{-- ユーザ登録ページへのリンク --}}
                             <li class="nav-item">{!! link_to_route('signup.get', '新規登録', [], ['class' => 'nav-link']) !!}</li>

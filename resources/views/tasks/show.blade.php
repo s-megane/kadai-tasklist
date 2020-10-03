@@ -2,7 +2,7 @@
 
 @section("content")
 
-    <h1>タスクNo. {{ $task->id }} の詳細ページ</h1>
+    <h1>{{$user->name}}のタスクNo. {{ $task->id }} の詳細ページ</h1>
 
     <table class="table table-bordered">
         <tr>
