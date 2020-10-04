@@ -5,7 +5,7 @@
  
 
 
-    <h1>タスクNo. {{ $task->id }} の内容編集ページ </h1>
+    <h1>{{$user->name}}のタスクNo. {{ $task->id }} の内容編集ページ </h1>
     
     <div class="row">
         <div class="col-6">

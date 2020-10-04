@@ -8,10 +8,9 @@ class UsersController extends Controller
 {
     public function destroy($id)
     {
-        $user = User::findOrFail($id) ;
-        if (\Auth::id() === $user->id){
-            $user->delete() ;
-        }
-        return redirect("/");
+       $user = User::findOrFail($id);
+       \Auth::logout();
+       $user->delete();
+       return redirect("/");
     }
 }

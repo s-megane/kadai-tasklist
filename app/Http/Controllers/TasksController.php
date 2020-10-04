@@ -59,7 +59,7 @@ class TasksController extends Controller
         ]);
         
         $request->user()->tasks()->create([
-            "user_id" => $request->user_id ,
+            //"user_id" => $request->user_id ,
             "content" => $request->content ,
             "status" => $request->status ,
             
@@ -97,9 +97,10 @@ class TasksController extends Controller
     public function edit($id)
     {
         $task =Task::findOrFail($id);
-        
+        $user = \Auth::user() ;
         return view("tasks.edit" , [
             "task" => $task ,
+            "user" => $user ,
             ]);
     }
 
