@@ -4,7 +4,7 @@
 
     <h1>{{ $user->name}}のタスク一覧</h1>
     
-    @if (count($tasks ?? '') > 0)
+    @if (count ($tasks) > 0)
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tasks ?? '' as $task)
+                @foreach ($tasks as $task)
                 <tr>
                     
                     <td>{!! link_to_route("tasks.show","No." . $task->id , ["task" => $task->id]) !!}</td>

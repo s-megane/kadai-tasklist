@@ -15,18 +15,22 @@ class TasksController extends Controller
      */
     public function index()
     {
+        $data = [];
         if (\Auth::check()) {
-           // $user_id = \Auth::user_id() ;
+            //$user_id = \Auth::user_id() ;
             $user = \Auth::user() ;
-            $tasks = Task::all();
-            
-            return view("tasks.index" , [
+            //$tasks = $user->tasks()->orderBy('created_at');
+            $tasks = \Auth::user()->tasks;    
+                $data = [
                 //"user_id" => $user_id ,
-                "tasks" => $tasks , 
+                
                 "user" => $user ,
-            ]);
+                "tasks" => $tasks , 
+                ]; 
+            
         }
-        return view('welcome');
+        return view('welcome' , $data);
+        
     }
 
     /**
@@ -82,10 +86,15 @@ class TasksController extends Controller
     {
         $task = Task::findOrFail($id);
         $user = \Auth::user() ;
-        return view("tasks.show" ,[
-            "task" => $task ,
-            "user" => $user ,
-            ]);
+        if (\Auth::id() === $task->user_id){
+            
+            
+            return view("tasks.show" ,[
+                "task" => $task ,
+                "user" => $user ,
+                ]);
+        }
+        return redirect("/");
     }
 
     /**
@@ -96,12 +105,17 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $task =Task::findOrFail($id);
+         $task = Task::findOrFail($id);
         $user = \Auth::user() ;
-        return view("tasks.edit" , [
-            "task" => $task ,
-            "user" => $user ,
-            ]);
+        if (\Auth::id() === $task->user_id){
+            
+            
+            return view("tasks.edit" ,[
+                "task" => $task ,
+                "user" => $user ,
+                ]);
+        }
+        return redirect("/");
     }
 
     /**
